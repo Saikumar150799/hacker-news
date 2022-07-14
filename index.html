@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <title>Hacker news</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+    <script src="./app.js"></script>
+    <script src="./dirPagination.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div ng-controller="hackerNews" class="container">
+        <div class="header">
+            <nav>
+                <div class="left">
+                    <div class="logo">
+                        <img src="https://news.ycombinator.com/y18.gif" alt="logo">
+                        <h5>Hacker News</h5>
+                    </div>
+                    <div class="menu">
+                        <ul>
+                            <li><a href="">new</a></li>
+                            <li><a href="">past</a></li>
+                            <li><a href="">comments</a></li>
+                            <li><a href="">ask</a></li>
+                            <li><a href="">show</a></li>
+                            <li><a href="">jobs</a></li>
+                            <li><a href="">sumbit</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="searchBar">
+                    <input type="text" placeholder="Search" ng-model='searchText'>
+                </div>
+                <div class="right">
+                    <ul>
+                        <li>login</li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="items">
+            <main>
+                <!-- <ol> -->
+                    <div class="items" dir-paginate="item in data | itemsPerPage:17 | filter:searchText">
+                        <!-- <li class="s-no"> -->
+                            <div class="title-container">
+                                <div class="s-no"><span> {{$index+1}}.</span></div>
+                                <div>
+                                    <div class="title">
+                                        <p><a href="{{item.url}}">{{item.title}}</a> </p>
+                                        <a href="" class="domain">(westerninvestor.com)</a>
+                                    </div>
+                                    <div class="details">
+                                        <div class="points">
+                                            <span> {{item.score}} points by </span>
+                                            <a href="">{{item.by}}</a>
+                                            <a href="">{{item.time | date:"h"}} hours ago</a>
+                                        </div>
+                                        <div class="hide">
+                                            <a href="" target="_blank">hide</a>
+                                        </div>
+                                        <div class="comments">
+                                            <a href="" target="_blank">{{item.kids.length}} comments</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- </li> -->
+                    </div>
+                <!-- </ol> -->
+            </main>
+            <dir-pagination-controls class="pagination" direction-links="true" boundary-links="true">
+            </dir-pagination-controls>
+
+        </div>
+    </div>
+</body>
+
+</html>
