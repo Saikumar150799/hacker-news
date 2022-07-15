@@ -10,11 +10,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
     <script src="./app.js"></script>
     <script src="./dirPagination.js"></script>
-
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body ng-controller="appController">
     <div ng-controller="hackerNews" class="container">
         <div class="header">
             <nav>
@@ -25,12 +24,12 @@
                     </div>
                     <div class="menu">
                         <ul>
-                            <li><a href="">new</a></li>
+                            <li><a href="#!/">new</a></li>
                             <li><a href="">past</a></li>
                             <li><a href="">comments</a></li>
-                            <li><a href="">ask</a></li>
-                            <li><a href="">show</a></li>
-                            <li><a href="">jobs</a></li>
+                            <li><a href="#!ask">ask</a></li>
+                            <li><a href="#!show">show</a></li>
+                            <li><a href="#!jobs">jobs</a></li>
                             <li><a href="">sumbit</a></li>
                         </ul>
                     </div>
@@ -45,41 +44,17 @@
                 </div>
             </nav>
         </div>
-        <div class="items">
-            <main>
-                <!-- <ol> -->
-                    <div class="items" dir-paginate="item in data | itemsPerPage:17 | filter:searchText">
-                        <!-- <li class="s-no"> -->
-                            <div class="title-container">
-                                <div class="s-no"><span> {{$index+1}}.</span></div>
-                                <div>
-                                    <div class="title">
-                                        <p><a href="{{item.url}}">{{item.title}}</a> </p>
-                                        <a href="" class="domain">(westerninvestor.com)</a>
-                                    </div>
-                                    <div class="details">
-                                        <div class="points">
-                                            <span> {{item.score}} points by </span>
-                                            <a href="">{{item.by}}</a>
-                                            <a href="">{{item.time | date:"h"}} hours ago</a>
-                                        </div>
-                                        <div class="hide">
-                                            <a href="" target="_blank">hide</a>
-                                        </div>
-                                        <div class="comments">
-                                            <a href="" target="_blank">{{item.kids.length}} comments</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <!-- </li> -->
-                    </div>
-                <!-- </ol> -->
-            </main>
-            <dir-pagination-controls class="pagination" direction-links="true" boundary-links="true">
-            </dir-pagination-controls>
-
+        <div class="spinner" ng-show="loading">
+            <div class="overlay"></div>
+            <div class="loader"></div>
+            <span>Loading...</span>
         </div>
+        <div ng-view></div>
+
+        <dir-pagination-controls on-page-change="updatePage(newPageNumber,oldPageNumber)" class="pagination"
+            direction-links="true" max-size="5">
+        </dir-pagination-controls>
+
     </div>
 </body>
 

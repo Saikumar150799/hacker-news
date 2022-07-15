@@ -1,0 +1,32 @@
+<div class="items">
+    <div ng-show="error">Oops! page was not found </div>
+    <main>
+        <ol start="{{startPageNumber}}">
+            <div class="items" dir-paginate="item in data | itemsPerPage:17 | filter:searchText">
+                <li class="s-no">
+                    <div class="title-container">
+                        <div>
+                            <div class="title">
+                                <p><a href="{{item.url}}">{{item.title}}</a> </p>
+                                <a href="" class="domain">(westerninvestor.com)</a>
+                            </div>
+                            <div class="details">
+                                <div class="points">
+                                    <span> {{item.score}} points by </span>
+                                    <a href="">{{item.by}}</a>
+                                    <a href="">{{item.time | date:"h"}} hours ago</a>
+                                </div>
+                                <div class="hide">
+                                    <a href="" target="_blank">hide</a>
+                                </div>
+                                <div class="comments">
+                                    <a href="" target="_blank">{{item.kids.length}} comments</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </div>
+        </ol>
+    </main>
+</div>
